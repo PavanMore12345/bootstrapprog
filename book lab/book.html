@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <script>
+  var myArr;
+function myfun(callback){
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", "book.json", true);
+  xmlhttp.send();
+
+xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myArr = JSON.parse(this.responseText);
+    //  console.log(myArr[0].topics.topic1);
+      //console.log(myArr[1].bookname);
+      callback(myArr)
+    /*  for(i in myArr)
+      {
+      var btn = document.createElement("BUTTON");
+      var t =document.createTextNode(myArr[i].bookname);
+      btn.appendChild(t);
+      document.body.appendChild(btn);
+      }
+*/
+      /* document.getElementById(myArr[1].bookname).onclick=function()
+      {
+        alert("hello");
+      };*/
+    }
+
+};
+}
+
+function cfun()
+{
+  myfun(function(myArr)
+{
+  //document.body.innerHTML="";
+//  var link="www.google.com"
+  console.log(myArr.book1.topics[0]);
+  document.getElementById("id1").innerHTML="";
+  for(var i=0;i<Object.keys(myArr.book1.topics).length;i++)
+  {
+    var link=document.createElement("a");
+    var var1=myArr.book2.topics[i];
+    // var br1=document.createElement("br");
+    link.innerHTML=myArr.book2.topics[i]+"<br>";
+//  console.log(myArr[i].topics.topic1);
+link.setAttribute("href",'javascript:compare("'+var1+'")');
+  // link.appendChild(linktest);
+    document.getElementById("id1").appendChild(link);
+  }
+});
+}
+function jfun()
+{
+  myfun(function(myArr)
+  {
+  console.log(myArr.book1.topics[0]);
+  document.getElementById("id1").innerHTML="";
+  for(var i=0;i<Object.keys(myArr.book1.topics).length;i++)
+  {
+    var link=document.createElement("a");
+      var var1=myArr.book1.topics[i];
+    // var br1=document.createElement("br");
+    link.innerHTML=myArr.book1.topics[i]+"<br>";
+//  console.log(myArr[i].topics.topic1);
+link.setAttribute("href",'javascript:compare("'+var1+'")');
+  // link.appendChild(linktest);
+    document.getElementById("id1").appendChild(link);
+  }
+});
+
+}
+function cpfun()
+{
+  myfun(function(myArr)
+  {
+
+  console.log(myArr.book3.topics[0]);
+  document.getElementById("id1").innerHTML="";
+  for(var i=0;i<Object.keys(myArr.book3.topics).length;i++)
+  {
+    var link=document.createElement("a");
+    var var1=myArr.book3.topics[i];
+    // var br1=document.createElement("br");
+    link.innerHTML=myArr.book3.topics[i]+"<br>";
+  //  console.log(myArr[i].topics.topic1);
+  link.setAttribute("href",'javascript:compare("'+var1+'")');
+  // link.appendChild(linktest);
+    document.getElementById("id1").appendChild(link);
+  }
+  });
+}
+function compare(r)
+{
+    //console.log(myArr.[0]);
+    var temp="";
+  for(var i=0;i<Object.keys(myArr.book3.topics).length;i++)
+  {
+var topic1 =myArr.book3.topics[i];
+if(topic1==r)
+{
+  temp=temp+"<br>"+myArr.book3.bookname;
+}
+}
+for(var i=0;i<Object.keys(myArr.book2.topics).length;i++)
+{
+var topic1 =myArr.book2.topics[i];
+if(topic1==r)
+{
+temp=temp+"<br>"+myArr.book2.bookname;
+}
+}
+for(var i=0;i<Object.keys(myArr.book1.topics).length;i++)
+{
+var topic1 =myArr.book1.topics[i];
+if(topic1==r)
+{
+temp=temp+"<br>"+myArr.book1.bookname;
+}
+}
+document.getElementById("demo").innerHTML=temp;
+}
+  //console.log(r);
+
+//  document.getElementById("demo").innerHTML=r;
+  </script>
+  </head>
+  <body>
+    <button onclick="cfun()">Clang</button>
+     <button onclick="jfun()">Javalang</button>
+     <button onclick="cpfun()">c++lang</button>
+    <div id="id1">
+      <br>
+    </div>
+    <p id="demo"></p>
+  </body>
+</html>

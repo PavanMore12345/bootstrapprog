@@ -1,0 +1,16 @@
+[
+  {
+   
+  "bookname":"java lang",
+  "topics":["object oriented","exception handling","multithreding"]
+},
+{
+"bookname":"c lang",
+"topics":["pointer","procedure lang","header files"]
+},
+{
+  "bookname":"c++ lang",
+  "topics":["pointer","object oriented","bottom to top approch"]
+}
+]
+

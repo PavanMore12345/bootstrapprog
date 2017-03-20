@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+  #container {
+  height: 400px;
+  width: 400px;
+  position: relative;
+}
+#image {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#text {
+  z-index: 100;
+  position: absolute;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  left: 350px;
+  top: 175px;
+}
+  body
+  {
+background-color:black;
+ }
+   </style>
+  </head>
+  <body>
+    <form action="demo.html" method="get">
+ <div id="container">
+    <img id="image" src="registration.png" class="img-responsive" width="600" height="600"/>
+  </div>
+    <button type="button" class="btn btn-primary btn-lg" id="text" onclick="submit()">Click Here !</button>
+    </form>
+  </body>
+</html>

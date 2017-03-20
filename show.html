@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js"></script>
+  <script>
+  var config = {
+    apiKey: "AIzaSyCi6WfidBAiCDwq4Z2aecgkyWhslrzDklg",
+    authDomain: "regis-cb769.firebaseapp.com",
+    databaseURL: "https://regis-cb769.firebaseio.com",
+    storageBucket: "regis-cb769.appspot.com",
+    messagingSenderId: "633208140625"
+  };
+  firebase.initializeApp(config);
+  function myfun2()
+{
+  var ref = firebase.database().ref();
+
+  ref.on("value", function(snapshot) {
+var temp1=" ";var temp=" ";
+snapshot.forEach(function (value) {
+//  console.log(value.val());
+  console.log( "name is"+value.key);
+  var value1=value.key;
+  var dom ="<tr><td>"+value1+"</td>";
+  /*var row=$('<tr><td>'+value1+'</td>');
+  $('#mytable').append(row);
+  var str1="name is"+value.key;*/
+  var abc=value.val();
+  console.log(abc);
+  for(var a in abc)
+  {
+  var row1;
+  // $('tr').append('<td>'+abc[a]+'</td>');
+  dom+='<td>'+abc[a]+'</td>';
+  }
+  dom+="</tr>";
+  console.log(dom);
+  $('#mytable').append(dom);
+    console.log(value1+ a+"="+abc[a]);
+
+});
+//append
+  }, function (error) {
+     console.log("Error: " + error.code);
+  });
+}
+  </script>
+  </head>
+  <body onload="myfun2()">
+<table class="table" id="mytable">
+  <tbody>
+  <tr>
+    <th>name</th>
+    <th>city</th>
+    <th>email Id</th>
+    <th>Gender</th>
+    <th>address</th>
+    <th>password</th>
+    <th>phoneNumber</th>
+  </tr>
+</tbody>
+</table>
+  </body>
+</html>

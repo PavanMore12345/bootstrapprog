@@ -1,0 +1,183 @@
+<html>
+<head>
+  <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/3.7.0/firebase.js">
+ </script>
+ <style>
+body{
+   background-image: url('iamges7.png');
+   background-repeat: repeat;
+    /*background-size:auto;*/
+ }
+ </style>
+<script>
+  var config = {
+    apiKey: "AIzaSyCi6WfidBAiCDwq4Z2aecgkyWhslrzDklg",
+    authDomain: "regis-cb769.firebaseapp.com",
+    databaseURL: "https://regis-cb769.firebaseio.com",
+    storageBucket: "regis-cb769.appspot.com",
+    messagingSenderId: "633208140625"
+  };
+  firebase.initializeApp(config);
+$(document).ready(function(){
+
+$("#btn1").click(function(){
+    if(validateForm())
+    {
+      var data=firebase.database().ref();
+      var email=$("#usr1").val();
+      var pass= $("#usr2").val();
+      var phone=$("#usr3").val();
+      var adres=$("#usr4").val();
+      var name=$("#usr").val();
+      var city=$( "#sel22 option:selected" ).text();
+      var gen=$('input[name=radio1]:checked').val();
+      data.child(name).set({
+        Email:email,
+        password:pass,
+        phoneNum:phone,
+        address:adres,
+        City:city,
+        Gender:gen
+      });
+      alert("data inserted successfully");
+    }
+});
+$("#btn2").click(function(){
+  $("#usr").val("");
+  $("#usr1").val("");
+  $("#usr2").val("");
+  $("#usr3").val("");
+  $("#usr4").val("");
+  $('input[name=radio1]:checked').val("");
+  //$( "#sel22 option:selected" ).text("");
+  $("input:radio").attr("checked", false);
+  $("option:selected").prop("selected", false);
+});
+$("#btn3").click(function()
+{
+  window.location.href = 'show.html';
+});
+function validateForm()
+{
+    var nameReg = /^[A-Za-z]+$/;
+    var numberReg =  /^[0-9]+$/;
+    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+
+    var names = $('#usr').val();
+    var email = $('#usr1').val();
+    var pass = $('#usr2').val();
+    var telephone = $('#usr3').val();
+    var address= $('#usr4').val();
+
+    var inputVal = new Array(names, email, pass, telephone, address);
+
+    var inputMessage = new Array("name", "password", "email address", "telephone number", "address");
+    var flag = true;
+     $('.error').hide();
+
+        if(inputVal[0] == ""){
+            $('#usr').after('<span class="error"> Please enter your ' + inputMessage[0] + '</span>');
+            flag =false;
+        }
+        else if(!nameReg.test(names)){
+            $('#usr').after('<span class="error"> Letters only</span>');
+            flag=false;
+        }
+        if(inputVal[2] == ""){
+            $('#usr2').after('<span class="error"> Please enter your ' + inputMessage[1] + '</span>');
+            flag=false;
+        }
+
+        if(inputVal[1] == ""){
+      $('#usr1').after('<span class="error"> Please enter your ' + inputMessage[2] + '</span>');
+        flag=false;
+        }
+        else if(!emailReg.test(email)){
+    $('#usr1').after('<span class="error"> Please enter a valid email address</span>');
+      flag=false;
+        }
+
+        if(inputVal[3] == ""){
+            $('#usr3').after('<span class="error"> Please enter your ' + inputMessage[3] + '</span>');
+            flag=false;
+        }
+        else if(!numberReg.test(telephone)){
+            $('#usr3').after('<span class="error"> Numbers only</span>');
+            flag=false;
+        }
+
+        if(inputVal[4] == ""){
+            $('#usr4').after('<span class="error"> Please enter your ' + inputMessage[4] + '</span>');
+            flag=false;
+        }
+        return flag;
+}
+
+});
+</script>
+</head>
+<body>
+  <form action="show.html" id="form1" name="register">
+  <div class="row">
+    <div class="bg">
+    <div class="col-lg-4 col-lg-offset-4">
+   <form role="form" class="col-xs-10">
+     <div class="page-header">
+       <h1>Registiration Form</h1>
+     </div>
+  <div class="form-group">
+    <label for="usr">Name:</label>
+    <input type="text" class="form-control" id="usr" placeholder="enter name" name="name" required>
+  </div>
+    <div class="form-group">
+      <label for="usr">Email</label>
+      <input type="text" class="form-control" id="usr1" placeholder="enter Email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="usr">password</label>
+      <input type="password" class="form-control" id="usr2" placeholder="enter Password" name="pass" required>
+    </div>
+    <div class="form-group">
+      <label for="usr">Phone no:</label>
+      <input type="text" class="form-control" id="usr3" placeholder="enter PhoneNo" name="phoneno">
+    </div>
+    <div class="form-group">
+      <label for="usr">Address:</label>
+      <input type="text" class="form-control" id="usr4" placeholder="enter Address" name="adress">
+    </div>
+    <div class="form-group">
+      <label for="sel1">city</label>
+      <select class="form-control"id="sel22">
+        <option>city</option>
+        <option>pune</option>
+        <option>mumbai</option>
+        <option>banglore</option>
+        <option>nanded</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sel1">Gender:</label>
+    <label class="radio-inline">
+      <input type="radio" name="radio1" value="male" checked="true">Male
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="radio1" value="female" checked="false">Female
+    </label>
+  </div>
+  <div class="form-group">
+   <input type="button" class="btn btn-default"  value="submit" id="btn1">
+    <input type="button" class="btn btn-default"  value="cancel" id="btn2">
+      <input type="button" class="btn btn-default"  value="show" id="btn3">
+  </div>
+</form>
+</div>
+</div>
+</div>
+</form>
+</body>
+</html>
